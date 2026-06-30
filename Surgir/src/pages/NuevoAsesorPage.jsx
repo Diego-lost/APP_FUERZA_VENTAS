@@ -4,6 +4,7 @@ import PageHead from '../components/layout/PageHead.jsx'
 import Card from '../components/ui/Card.jsx'
 import Alert from '../components/ui/Alert.jsx'
 import Loader from '../components/ui/Loader.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import { crearAsesor, listarAgencias } from '../services/fventasService.js'
 import { extractError, humanizar } from '../utils/format.js'
 
@@ -11,6 +12,8 @@ const NIVELES = ['Junior I', 'Junior II', 'Senior I', 'Senior II']
 const PERFILES = ['operador', 'super_operador', 'supervisor', 'administrador']
 
 export default function NuevoAsesorPage() {
+  const { user } = useAuth()
+  const esAdmin = user?.perfil === 'administrador'
   const [agencias, setAgencias] = useState([])
   const [loadingAg, setLoadingAg] = useState(true)
   const [accessError, setAccessError] = useState(null)
@@ -38,14 +41,7 @@ export default function NuevoAsesorPage() {
         setAgencias(ags)
         if (ags.length) setF((s) => ({ ...s, id_agencia: String(ags[0].id) }))
       })
-      .catch((err) => {
-        const msg = extractError(err)
-        setAccessError(
-          msg.includes('sin_permiso')
-            ? 'Solo administradores pueden crear asesores.'
-            : msg,
-        )
-      })
+      .catch((err) => setAccessError(extractError(err)))
       .finally(() => setLoadingAg(false))
   }, [])
 
@@ -88,7 +84,13 @@ export default function NuevoAsesorPage() {
         subtitle="Alta de personal de fuerza de ventas (requiere perfil administrador)."
         icon={BadgePlus}
       />
-      {accessError && <Alert tipo="warn">{accessError}</Alert>}
+      {accessError && <Alert tipo="error">{accessError}</Alert>}
+      {!esAdmin && !accessError && (
+        <Alert tipo="warn">
+          Solo administradores pueden crear asesores. Tu perfil actual: {humanizar(user?.perfil || 'operador')}.
+          Inicia sesión con AG-001-01 tras ejecutar el script SQL 35 en Supabase.
+        </Alert>
+      )}
       {error && <Alert tipo="error">{error}</Alert>}
       {ok && <Alert tipo="success">{ok}</Alert>}
 
@@ -143,7 +145,7 @@ export default function NuevoAsesorPage() {
             <input className="hb-input" type="password" value={f.password} onChange={set('password')} />
           </div>
           <div style={{ gridColumn: '1 / -1' }}>
-            <button className="hb-btn" type="submit" disabled={saving || !!accessError}>
+            <button className="hb-btn" type="submit" disabled={saving || !esAdmin || !agencias.length}>
               <BadgePlus size={16} /> {saving ? 'Creando…' : 'Crear asesor'}
             </button>
           </div>

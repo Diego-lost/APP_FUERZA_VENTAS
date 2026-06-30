@@ -61,7 +61,7 @@ export default function NuevoClientePage() {
     }
     const lat = Number(f.lat)
     const lng = Number(f.lng)
-    if (!lat || !lng) {
+    if (!Number.isFinite(lat) || !Number.isFinite(lng)) {
       setError('Indica la ubicación del negocio (botón "Usar mi ubicación" o lat/lng).')
       return
     }
@@ -96,10 +96,17 @@ export default function NuevoClientePage() {
       <>
         <PageHead title="Cliente registrado" icon={CheckCircle2} />
         <Alert tipo="success">
-          Cliente DNI {done.dni} creado. Puede iniciar sesión en la app Clientes con su DNI y contraseña.
+          Cliente DNI {done.dni} creado. Aparece en Cartera del día y Planificación de ruta (con GPS).
+          Puede iniciar sesión en la app Clientes con su DNI y contraseña.
         </Alert>
-        <div style={{ display: 'flex', gap: 10, marginTop: 16 }}>
-          <button className="hb-btn" onClick={() => navigate(`/clientes/${done.userId}/ficha`)}>
+        <div style={{ display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap' }}>
+          <button className="hb-btn" onClick={() => navigate('/cartera')}>
+            Ir a Cartera del día
+          </button>
+          <button className="hb-btn" onClick={() => navigate('/ruta')}>
+            Ver planificación de ruta
+          </button>
+          <button className="hb-btn hb-btn-gray" onClick={() => navigate(`/clientes/${done.userId}/ficha`)}>
             Ver ficha del cliente
           </button>
           <button className="hb-btn hb-btn-gray" onClick={() => { setDone(null); setF((s) => ({ ...s, dni: '' })) }}>

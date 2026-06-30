@@ -53,7 +53,7 @@ export default function CarteraPage() {
     try {
       await marcarVisita(target.id, { resultado, observacion })
       setItems((prev) => prev.filter((i) => i.id !== target.id))
-      setOk(`Visita de ${target.cliente_nombre} registrada. Ya no aparece en la cartera de hoy.`)
+      setOk(`Visita de ${target.cliente_nombre} registrada. Ya no aparece en cartera ni en planificación de ruta.`)
       setTarget(null)
     } catch (err) {
       setError(extractError(err))
@@ -108,6 +108,9 @@ export default function CarteraPage() {
                   <Badge estado={it.prioridad} label={`Prioridad ${humanizar(it.prioridad)}`} />
                   {it.es_credito_aprobado && (
                     <Badge estado="aprobado" tone="green" label="Visita desembolso" />
+                  )}
+                  {it.es_nuevo_cliente && (
+                    <Badge estado="pendiente" label="Nuevo cliente" />
                   )}
                   {gestionado
                     ? <Badge estado={it.estado_visita} />
