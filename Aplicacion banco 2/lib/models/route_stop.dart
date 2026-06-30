@@ -46,6 +46,7 @@ class RouteStop {
   final String estadoVisita;
 
   bool get esNuevaSolicitud => tipoGestion == 'NUEVA_SOLICITUD';
+  bool get esCreditoAprobado => tipoGestion == 'CREDITO_APROBADO';
   bool get visitaGestionada =>
       estadoVisita.isNotEmpty && estadoVisita != 'pendiente';
 
@@ -59,6 +60,8 @@ class RouteStop {
     switch (tipoGestion) {
       case 'NUEVA_SOLICITUD':
         return 'Nueva solicitud';
+      case 'CREDITO_APROBADO':
+        return 'Crédito aprobado — visita';
       case 'RECUPERACION_MORA':
         return 'Recuperación mora';
       case 'SEGUIMIENTO':
@@ -71,6 +74,9 @@ class RouteStop {
   }
 
   String get prioridadLabel {
+    if (esCreditoAprobado) {
+      return 'CRÉDITO APROBADO — visita para desembolso';
+    }
     if (esNuevaSolicitud) {
       return 'NUEVA SOLICITUD — visita requerida';
     }

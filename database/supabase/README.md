@@ -37,6 +37,8 @@ Scripts corregidos para ejecutar en **Supabase → SQL Editor**, en este orden:
 | 30 | `30_cobranza_completa.sql` | **Cobranza:** mora desde cronograma + gestiones persistidas |
 | 31 | `31_desembolso_seleccion_transmision.sql` | **Aprobar ≠ desembolsar:** desembolso selectivo en Transmisión |
 | 32 | `32_sync_deuda_tras_pago.sql` | **Pago cuota cliente:** sincroniza saldo pendiente visible al asesor (web + FVentas) |
+| 33 | `33_cartera_visitas_dia.sql` | Visitas cartera del día + RPC ruta |
+| 34 | `34_cartera_visita_post_aprobacion.sql` | **Al aprobar solicitud:** cliente en cartera del día para visita de desembolso |
 | — | `09_credito_producto.sql` | Opcional; ya está incluido en el 08 |
 
 `02b_seed_auth_helper.sql` es opcional (ya está integrado en el paso 5).

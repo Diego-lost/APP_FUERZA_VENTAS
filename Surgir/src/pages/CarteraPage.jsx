@@ -106,6 +106,9 @@ export default function CarteraPage() {
                 </div>
                 <div className="cm-item-right">
                   <Badge estado={it.prioridad} label={`Prioridad ${humanizar(it.prioridad)}`} />
+                  {it.es_credito_aprobado && (
+                    <Badge estado="aprobado" tone="green" label="Visita desembolso" />
+                  )}
                   {gestionado
                     ? <Badge estado={it.estado_visita} />
                     : <Badge estado="pendiente" tone="amber" label="Pendiente" />}

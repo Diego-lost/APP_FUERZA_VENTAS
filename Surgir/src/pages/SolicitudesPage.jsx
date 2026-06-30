@@ -148,7 +148,7 @@ export default function SolicitudesPage() {
               res.desembolsado
                 ? `Solicitud desembolsada. El cliente verá S/ ${Number(res.monto).toFixed(2)} en su cuenta.`
                 : res.estado === 'aprobado'
-                  ? 'Solicitud aprobada. Desembolsa desde Transmisión cuando corresponda.'
+                  ? 'Solicitud aprobada. El cliente apareció en Cartera del día para visitarlo antes del desembolso en Transmisión.'
                   : 'Decisión registrada correctamente.',
             )
             cargar()

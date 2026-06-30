@@ -4,6 +4,7 @@ function mapParada(p, idx) {
   const prioridad = Number(p.prioridad) || 0
   const diasMora = Number(p.dias_mora) || 0
   const esNueva = p.tipo_gestion === 'NUEVA_SOLICITUD'
+  const esAprobado = p.tipo_gestion === 'CREDITO_APROBADO'
   return {
     id: p.user_id || `ruta-${idx}`,
     cliente_id: p.user_id,
@@ -28,6 +29,7 @@ function mapParada(p, idx) {
     solicitud_plazo: p.solicitud_plazo,
     solicitud_estado: p.solicitud_estado,
     es_nueva_solicitud: esNueva,
+    es_credito_aprobado: esAprobado,
   }
 }
 
