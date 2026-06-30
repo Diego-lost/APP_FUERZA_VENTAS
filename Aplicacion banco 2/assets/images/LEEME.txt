@@ -1,0 +1,12 @@
+Coloca aqui el logo de SURGIR con este nombre exacto:
+
+  surgir_logo.png
+
+Ruta completa en el proyecto:
+  assets/images/surgir_logo.png
+
+Despues de copiar la imagen, ejecuta en la terminal:
+  flutter pub get
+
+Si la app ya estaba corriendo, haz Hot Restart (R mayuscula) o vuelve a ejecutar:
+  flutter run

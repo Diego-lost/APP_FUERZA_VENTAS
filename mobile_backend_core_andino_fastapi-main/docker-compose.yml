@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: andino123
+      POSTGRES_DB: bd_core_mobile
+    ports:
+      - "5433:5432"
+    volumes:
+      - andino_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d bd_core_mobile"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    ports:
+      - "8003:8003"
+    environment:
+      DATABASE_URL: postgresql://postgres:andino123@db:5432/bd_core_mobile
+      SECRET_KEY: dev-secret-andino-2026
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 480
+      CORE_BACKEND_URL: http://localhost:8001
+      CORE_DATABASE_URL: postgresql://postgres:andino123@db:5432/bd_core_mobile
+      PORT: 8003
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  andino_pgdata:

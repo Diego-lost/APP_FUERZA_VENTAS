@@ -1,0 +1,37 @@
+# ── No incluir en este repo (otros proyectos del monorepo local) ──
+/flutter_financiera_surgir_clientes/
+/mobile_app_fventas_andino_flutter-main/
+/docs/exposicion/
+
+# ── Secretos ──
+.env
+.env.local
+*.local
+
+# ── Flutter / Dart ──
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.pub-cache/
+**/.pub/
+**/build/
+**/coverage/
+**/*.iml
+**/.idea/
+
+# ── Node / Vite ──
+**/node_modules/
+**/dist/
+**/.vite/
+
+# ── Python ──
+**/__pycache__/
+**/*.pyc
+**/.venv/
+**/venv/
+
+# ── OS / IDE ──
+.DS_Store
+Thumbs.db
+*.swp
+*.log

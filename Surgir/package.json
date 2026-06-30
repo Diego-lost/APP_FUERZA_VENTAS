@@ -1,0 +1,24 @@
+{
+  "name": "surgir",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Financiera SURGIR — Portal web Fuerza de Ventas (asesores). React + Vite + Supabase.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.0",
+    "axios": "^1.7.9",
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.5"
+  }
+}
